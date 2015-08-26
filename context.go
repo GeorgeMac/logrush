@@ -12,6 +12,26 @@ type Context struct {
 	start   time.Time
 }
 
+func For(context string) *Context {
+	return logger.For(context)
+}
+
+func ForTimed(context string) *Context {
+	return logger.ForTimed(context)
+}
+
+func (l *LogRush) For(context string) *Context {
+	c := &Context{Entry: l.log()}
+	c.context = context
+	return c
+}
+
+func (l *LogRush) ForTimed(context string) *Context {
+	c := l.For(context)
+	c.Start()
+	return c
+}
+
 func (c *Context) Start() {
 	c.start = now()
 	c.WithField("start", c.start).

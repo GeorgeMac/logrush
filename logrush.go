@@ -46,18 +46,6 @@ func (l *LogRush) Set(opts ...Option) {
 	l.refresh()
 }
 
-func (l *LogRush) Context(context string) *Context {
-	c := &Context{Entry: l.log()}
-	c.context = context
-	return c
-}
-
-func (l *LogRush) BeginTimed(context string) *Context {
-	c := l.Context(context)
-	c.Start()
-	return c
-}
-
 func (l *LogRush) refresh() {
 	l.logger = logrus.New()
 	l.logger.Level = l.level
