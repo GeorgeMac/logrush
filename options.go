@@ -21,3 +21,15 @@ func Common(common logrus.Fields) Option {
 		l.common = common
 	}
 }
+
+func Formatter(formatter logrus.Formatter) Option {
+	return func(l *LogRush) {
+		l.formatter = formatter
+	}
+}
+
+func Level(level logrus.Level) Option {
+	return func(l *LogRush) {
+		l.level = level
+	}
+}

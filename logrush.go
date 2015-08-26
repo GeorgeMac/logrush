@@ -21,12 +21,16 @@ func Set(opts ...Option) {
 type LogRush struct {
 	appKey, app string
 	common      logrus.Fields
+	formatter   logrus.Formatter
+	level       logrus.Level
+	logger      *logrus.Logger
 }
 
 func New(app string, opts ...Option) *LogRush {
 	l := &LogRush{
 		appKey: "app",
 		app:    app,
+		level:  logrus.InfoLevel,
 	}
 
 	// apply options to LogRush instance
@@ -39,14 +43,22 @@ func (l *LogRush) Set(opts ...Option) {
 	for _, opt := range opts {
 		opt(l)
 	}
+	l.refresh()
 }
 
-func (l *LogRush) logger() *logrus.Entry {
-	logger := logrus.WithFields(logrus.Fields{
-		l.appKey: l.app,
-	})
-	if l.common != nil {
-		logger = logger.WithFields(l.common)
+func (l *LogRush) refresh() {
+	l.logger = logrus.New()
+	l.logger.Level = l.level
+
+	if l.formatter != nil {
+		l.logger.Formatter = l.formatter
 	}
-	return logger
+}
+
+func (l *LogRush) log() *logrus.Entry {
+	e := l.logger.WithField(l.appKey, l.app)
+	if l.common != nil {
+		e = e.WithFields(l.common)
+	}
+	return e
 }
