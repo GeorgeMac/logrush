@@ -14,20 +14,20 @@ It’s `logrus` with some common contextual stuff I write a lot
 
 ```go
 import (
-    log “github.com/GeorgeMac/logrush”
-    “github.com/Sirupsen/logrus”
+    log "github.com/GeorgeMac/logrush"
+    "github.com/Sirupsen/logrus"
 )
 
 func main() {
-    env := os.GetEnv(“GO_ENV”)
-    if env == “” {
-        env = “development”
+    env := os.GetEnv("GO_ENV")
+    if env == "" {
+        env = "development"
     }
 
-    fields := logrus.Fields{“environment”: env}
+    fields := logrus.Fields{"environment": env}
 
     // global logger
-    log.Set(log.App(“my-service”),
+    log.Set(log.App("my-service"),
         log.Common(fields),
         log.Formatter(&logrus.JSONFormatter{}),
         log.Level(logrus.DebugLevel))
@@ -36,7 +36,7 @@ func main() {
     log.Debugf(...)
 
     // separate logger
-    logger := log.New(“other-service”, 
+    logger := log.New("other-service", 
         log.Common(fields),
         log.Level(logrus.InfoLevel))
 }
