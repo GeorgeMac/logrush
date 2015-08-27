@@ -30,24 +30,6 @@ type LogRush struct {
 
 // New returns a pointer to a new LogRush value.
 // It takes an app name and a variadic number of logrush.Option types.
-//
-// Examples:
-//
-//	logger := logrush.New("my-app")
-//
-// This will returns a new LogRush with the field "app" set to "my-app"
-//
-//	logger := logrush.New("my-service", logrush.AppKey("service"), logrush.Level(logrus.InfoLevel))
-//
-// This will return a new LogRush with fields {"service": "my-service"} with the logging
-// level set to Info.
-//
-//	logger := logrush.New("my-app",
-//		logrush.Formatter(&logrus.JSONFomatter{}),
-//		logrush.Common(logrus.Fields{"env":"development"}))
-//
-// This will return a new LogRush with fields {"app": "my-app", "env": "development"} and output
-// using logrus JSON formatting for logging via logstash.
 func New(app string, opts ...Option) *LogRush {
 	l := &LogRush{
 		appKey: "app",
