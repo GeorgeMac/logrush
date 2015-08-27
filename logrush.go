@@ -6,7 +6,7 @@ import (
 	"github.com/Sirupsen/logrus"
 )
 
-var now func() time.Time = time.Now
+var now = time.Now
 
 var logger *LogRush
 
