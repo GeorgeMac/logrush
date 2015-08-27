@@ -1,7 +1,5 @@
 package logrush
 
-// These functions proxy down to logrus via the l.log() function
-
 func Panic(v ...interface{})            { logger.Panic(v...) }
 func Panicf(f string, v ...interface{}) { logger.Panicf(f, v...) }
 func Panicln(v ...interface{})          { logger.Panicln(v...) }
