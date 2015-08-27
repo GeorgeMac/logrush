@@ -16,8 +16,8 @@ func For(context string) *Context {
 	return logger.For(context)
 }
 
-func ForTimed(context string) *Context {
-	return logger.ForTimed(context)
+func StartFor(context string) *Context {
+	return logger.StartFor(context)
 }
 
 func (l *LogRush) For(context string) *Context {
@@ -26,7 +26,7 @@ func (l *LogRush) For(context string) *Context {
 	return c
 }
 
-func (l *LogRush) ForTimed(context string) *Context {
+func (l *LogRush) StartFor(context string) *Context {
 	c := l.For(context)
 	c.Start()
 	return c
